@@ -1,0 +1,39 @@
+{
+  "name": "fast-memory-cache",
+  "version": "1.0.0",
+  "author": "Konstantin Ikonnikov",
+  "contributors": [
+    {
+      "name": "Dulin Marat",
+      "email": "mdevils@yandex.ru"
+    }
+  ],
+  "repository": "https://github.com/mdevils/fast-memory-cache",
+  "bugs": "https://github.com/mdevils/fast-memory-cache/issues",
+  "description": "Simple in-memory cache implementation",
+  "main": "lib/memory-cache.js",
+  "unit-coverage": {
+    "common": [
+      "-s",
+      "lib/**",
+      "-t",
+      "test/**",
+      "--",
+      "test"
+    ]
+  },
+  "scripts": {
+    "test": "jscs lib && jshint lib && mocha test",
+    "coverage": "unit-coverage run -p common",
+    "coverage-html": "unit-coverage run -p common -R html -o coverage.html"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "jscs": "^1.7.3",
+    "jshint": "^2.5.10",
+    "mocha": "^2.0.1",
+    "sinon": "^1.12.1",
+    "unit-coverage": "^3.2.0"
+  }
+}
