@@ -68,6 +68,18 @@ describe('MemoryCache', function () {
 
             clock.restore();
         });
+
+        it('should remove previous expiration', function () {
+            var clock = sinon.useFakeTimers();
+
+            cache.set('key', 1, 1);
+            cache.set('key', 2);
+
+            clock.tick(1000);
+            cache.get('key').should.equal(2);
+
+            clock.restore();
+        });
     });
 
     describe('delete()', function () {
