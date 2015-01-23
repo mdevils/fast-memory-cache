@@ -39,6 +39,21 @@ describe('MemoryCache', function () {
             clock.restore();
         });
 
+        describe('when expiration time is 0', function () {
+            it('should not expire value', function () {
+                var clock = sinon.useFakeTimers();
+
+                cache.set('key', 'val', 0);
+                cache.get('key').should.equal('val');
+
+                clock.tick(0);
+                cache.get('key').should.equal('val');
+
+                clock.tick(100);
+                cache.get('key').should.equal('val');
+            });
+        });
+
         it('should update data and expiration', function () {
             var clock = sinon.useFakeTimers();
 
@@ -75,7 +90,7 @@ describe('MemoryCache', function () {
             should.not.exist(cache.get('key1'));
             should.not.exist(cache.get('key2'));
 
-            // Не должен кинуть ошибку по истечении времени хранения.
+            // Should not throw error after expiration time.
             clock.tick(100);
 
             clock.restore();
