@@ -30,10 +30,10 @@ describe('MemoryCache', function () {
             cache.set('key', 1, 100);
             cache.get('key').should.equal(1);
 
-            clock.tick(50);
+            clock.tick(50 * 1000);
             cache.get('key').should.equal(1);
 
-            clock.tick(100);
+            clock.tick(100 * 1000);
             should.not.exist(cache.get('key'));
 
             clock.restore();
@@ -49,7 +49,7 @@ describe('MemoryCache', function () {
                 clock.tick(0);
                 cache.get('key').should.equal('val');
 
-                clock.tick(100);
+                clock.tick(100 * 1000);
                 cache.get('key').should.equal('val');
             });
         });
@@ -60,10 +60,10 @@ describe('MemoryCache', function () {
             cache.set('key', 1, 50);
             cache.set('key', 2, 100);
 
-            clock.tick(50);
+            clock.tick(50 * 1000);
             cache.get('key').should.equal(2);
 
-            clock.tick(100);
+            clock.tick(100 * 1000);
             should.not.exist(cache.get('key'));
 
             clock.restore();
@@ -91,7 +91,7 @@ describe('MemoryCache', function () {
             should.not.exist(cache.get('key2'));
 
             // Should not throw error after expiration time.
-            clock.tick(100);
+            clock.tick(100 * 1000);
 
             clock.restore();
         });
