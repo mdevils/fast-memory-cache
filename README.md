@@ -1,4 +1,4 @@
-# fast-memory-cache
+# fast-memory-cache [![Build Status](https://travis-ci.org/mdevils/fast-memory-cache.svg?branch=master)](https://travis-ci.org/mdevils/fast-memory-cache)
 
 Simple in-memory cache implementation for Node.js
 
