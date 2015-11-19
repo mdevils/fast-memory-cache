@@ -1,3 +1,5 @@
+'use strict';
+
 var should = require('chai').should();
 var sinon = require('sinon');
 var MemoryCache = require('../lib/memory-cache');

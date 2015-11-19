@@ -1,11 +1,11 @@
 # fast-memory-cache
 
-NodeJs fast memory cache implementation.
+Simple in-memory cache implementation for Node.js
 
 ## Installation
 
 ```
-npm install fast-memory-cache --save
+npm install --save fast-memory-cache
 ```
 
 ## Usage example
@@ -13,23 +13,28 @@ npm install fast-memory-cache --save
 ```js
 var MemoryCache = require('fast-memory-cache');
 
+// Create cache
 var cache = new MemoryCache();
 
+// Get/set value
 var val = cache.get('key'); // undefined
-
-cache.set('key', 'value', 1000);
-
+cache.set('key', 'value');
 val = cache.get('key'); // 'value'
 
+// Delete value
 cache.delete('key');
-
 val = cache.get('key'); // undefined
 
-cache.set('key', 'new-value', 1000);
-
-setTimeout(function() {
-
+// Set value which will expire after 1 second
+cache.set('key', 'new-value', 1);
+setTimeout(function () {
     val = cache.get('key'); // undefined
-
 }, 2000);
+```
+
+## Running tests
+
+```
+npm install
+npm test
 ```
