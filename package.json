@@ -1,16 +1,23 @@
 {
   "name": "fast-memory-cache",
+  "description": "Simple in-memory cache implementation",
   "version": "2.0.1",
-  "author": "Konstantin Ikonnikov",
+  "author": "Konstantin Ikonnikov <ikokostya@gmail.com>",
   "contributors": [
     {
       "name": "Dulin Marat",
       "email": "mdevils@yandex.ru"
     }
   ],
-  "repository": "https://github.com/mdevils/fast-memory-cache",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mdevils/fast-memory-cache"
+  },
   "bugs": "https://github.com/mdevils/fast-memory-cache/issues",
-  "description": "Simple in-memory cache implementation",
+  "keywords": [
+    "memory",
+    "cache"
+  ],
   "main": "lib/memory-cache.js",
   "unit-coverage": {
     "common": [
