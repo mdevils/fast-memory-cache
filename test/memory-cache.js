@@ -89,6 +89,10 @@ describe('MemoryCache', function () {
 
             expect(cache.get('key')).to.not.exist;
         });
+
+        it('should not lookup to Object.prototype', function () {
+            expect(cache.get('hasOwnProperty')).to.not.exist;
+        });
     });
 
     describe('#delete', function () {
@@ -97,6 +101,12 @@ describe('MemoryCache', function () {
             cache.delete('key');
 
             expect(cache.get('key')).to.not.exist;
+        });
+
+        it('should work properly with "hasOwnProperty" key', function () {
+            cache.set('hasOwnProperty', 1, 1);
+            cache.delete('hasOwnProperty');
+            expect(cache.get('hasOwnProperty')).to.not.exist;
         });
     });
 
@@ -115,6 +125,12 @@ describe('MemoryCache', function () {
             clock.tick(100 * 1000);
 
             clock.restore();
+        });
+
+        it('should work properly with "hasOwnProperty" key', function () {
+            cache.set('hasOwnProperty', 1, 1);
+            cache.clear();
+            expect(cache.get('hasOwnProperty')).to.not.exist;
         });
     });
 });
