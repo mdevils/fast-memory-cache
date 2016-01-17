@@ -11,7 +11,7 @@ describe('MemoryCache', function () {
         cache = new MemoryCache();
     });
 
-    describe('set()', function () {
+    describe('#set/#get', function () {
         it('should set data by keys', function () {
             var data1 = {};
             var data2 = {};
@@ -82,9 +82,16 @@ describe('MemoryCache', function () {
 
             clock.restore();
         });
+
+        it('should not see data from the other cache', function () {
+            var otherCache = new MemoryCache();
+            otherCache.set('key', 1);
+
+            should.not.exist(cache.get('key'));
+        });
     });
 
-    describe('delete()', function () {
+    describe('#delete', function () {
         it('should delete data by key', function () {
             cache.set('key', 1);
             cache.delete('key');
@@ -93,7 +100,7 @@ describe('MemoryCache', function () {
         });
     });
 
-    describe('clear()', function () {
+    describe('#clear', function () {
         it('should clear data', function () {
             var clock = sinon.useFakeTimers();
 
@@ -109,12 +116,5 @@ describe('MemoryCache', function () {
 
             clock.restore();
         });
-    });
-
-    it('should not see data from the other cache', function () {
-        var otherCache = new MemoryCache();
-        otherCache.set('key', 1);
-
-        should.not.exist(cache.get('key'));
     });
 });
