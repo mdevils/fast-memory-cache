@@ -14,5 +14,6 @@
   "quotmark": "single",
   "freeze": true,
   "nonbsp": true,
-  "node": true
+  "node": true,
+  "strict": true
 }
