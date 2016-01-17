@@ -1,6 +1,6 @@
 'use strict';
 
-var should = require('chai').should();
+var expect = require('chai').expect;
 var sinon = require('sinon');
 var MemoryCache = require('../lib/memory-cache');
 
@@ -11,32 +11,32 @@ describe('MemoryCache', function () {
         cache = new MemoryCache();
     });
 
-    describe('set()', function () {
+    describe('#set/#get', function () {
         it('should set data by keys', function () {
             var data1 = {};
             var data2 = {};
             cache.set('key1', data1);
             cache.set('key2', data2);
 
-            cache.get('key1').should.equal(data1);
-            cache.get('key2').should.equal(data2);
+            expect(cache.get('key1')).to.equal(data1);
+            expect(cache.get('key2')).to.equal(data2);
         });
 
         it('should return undefiend for non-existed key', function () {
-            should.not.exist(cache.get('key'));
+            expect(cache.get('key')).to.not.exist;
         });
 
         it('should set expiration for data', function () {
             var clock = sinon.useFakeTimers();
 
             cache.set('key', 1, 100);
-            cache.get('key').should.equal(1);
+            expect(cache.get('key')).to.equal(1);
 
             clock.tick(50 * 1000);
-            cache.get('key').should.equal(1);
+            expect(cache.get('key')).to.equal(1);
 
             clock.tick(100 * 1000);
-            should.not.exist(cache.get('key'));
+            expect(cache.get('key')).to.not.exist;
 
             clock.restore();
         });
@@ -46,13 +46,13 @@ describe('MemoryCache', function () {
                 var clock = sinon.useFakeTimers();
 
                 cache.set('key', 'val', 0);
-                cache.get('key').should.equal('val');
+                expect(cache.get('key')).to.equal('val');
 
                 clock.tick(0);
-                cache.get('key').should.equal('val');
+                expect(cache.get('key')).to.equal('val');
 
                 clock.tick(100 * 1000);
-                cache.get('key').should.equal('val');
+                expect(cache.get('key')).to.equal('val');
             });
         });
 
@@ -63,10 +63,10 @@ describe('MemoryCache', function () {
             cache.set('key', 2, 100);
 
             clock.tick(50 * 1000);
-            cache.get('key').should.equal(2);
+            expect(cache.get('key')).to.equal(2);
 
             clock.tick(100 * 1000);
-            should.not.exist(cache.get('key'));
+            expect(cache.get('key')).to.not.exist;
 
             clock.restore();
         });
@@ -78,43 +78,59 @@ describe('MemoryCache', function () {
             cache.set('key', 2);
 
             clock.tick(1000);
-            cache.get('key').should.equal(2);
+            expect(cache.get('key')).to.equal(2);
 
             clock.restore();
         });
+
+        it('should not see data from the other cache', function () {
+            var otherCache = new MemoryCache();
+            otherCache.set('key', 1);
+
+            expect(cache.get('key')).to.not.exist;
+        });
+
+        it('should not lookup to Object.prototype', function () {
+            expect(cache.get('hasOwnProperty')).to.not.exist;
+        });
     });
 
-    describe('delete()', function () {
+    describe('#delete', function () {
         it('should delete data by key', function () {
             cache.set('key', 1);
             cache.delete('key');
 
-            should.not.exist(cache.get('key'));
+            expect(cache.get('key')).to.not.exist;
+        });
+
+        it('should work properly with "hasOwnProperty" key', function () {
+            cache.set('hasOwnProperty', 1, 1);
+            cache.delete('hasOwnProperty');
+            expect(cache.get('hasOwnProperty')).to.not.exist;
         });
     });
 
-    describe('clear()', function () {
-        it('should clear data', function () {
+    describe('#clear', function () {
+        it('should clear all data', function () {
             var clock = sinon.useFakeTimers();
 
             cache.set('key1', 1);
             cache.set('key2', 2, 100);
 
             cache.clear();
-            should.not.exist(cache.get('key1'));
-            should.not.exist(cache.get('key2'));
+            expect(cache.get('key1')).to.not.exist;
+            expect(cache.get('key2')).to.not.exist;
 
             // Should not throw error after expiration time.
             clock.tick(100 * 1000);
 
             clock.restore();
         });
-    });
 
-    it('should not see data from the other cache', function () {
-        var otherCache = new MemoryCache();
-        otherCache.set('key', 1);
-
-        should.not.exist(cache.get('key'));
+        it('should work properly with "hasOwnProperty" key', function () {
+            cache.set('hasOwnProperty', 1, 1);
+            cache.clear();
+            expect(cache.get('hasOwnProperty')).to.not.exist;
+        });
     });
 });
