@@ -90,7 +90,7 @@ describe('MemoryCache', function () {
             expect(cache.get('key')).to.not.exist;
         });
 
-        it('should not lookup to Object.prototype', function () {
+        it('should not search keys in Object.prototype', function () {
             expect(cache.get('hasOwnProperty')).to.not.exist;
         });
     });
