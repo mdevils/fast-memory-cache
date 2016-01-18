@@ -1,3 +1,6 @@
+### 2.0.4
+* Clarify documentation for `expireTime` parameter in `MemoryCache#set`.
+
 ### 2.0.3
 * Fix usage keys from `Object.prototype` [#4](https://github.com/mdevils/fast-memory-cache/pull/4)
 
