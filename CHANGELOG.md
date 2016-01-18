@@ -1,3 +1,6 @@
+### 2.0.3
+* Fix usage keys from `Object.prototype` [#4](https://github.com/mdevils/fast-memory-cache/pull/4)
+
 ### 2.0.2
 * Package improvements [#3](https://github.com/mdevils/fast-memory-cache/pull/3)
 
