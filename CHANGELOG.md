@@ -9,6 +9,10 @@ All notable changes to this project will be documented in this file. See [standa
 
 * rewrite using TS, upgrade tooling, improve README ([948f68b](https://github.com/mdevils/fast-memory-cache/commit/948f68bd487fd150ab7270de4af89707ce82332f))
 
+**BREAKING CHANGES:**
+
+Export was changed to `default` to support ESM.
+
 ### 2.0.4
 * Clarify documentation for `expireTime` parameter in `MemoryCache#set`.
 
