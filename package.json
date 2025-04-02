@@ -50,7 +50,6 @@
     "flowgen": "^1.21.0",
     "husky": "^4.3.8",
     "prettier": "^3.5.3",
-    "release-please": "^17.0.0",
     "ts-jest": "^29.3.1",
     "tshy": "^3.0.2",
     "typescript": "^5.8.2",
