@@ -32,7 +32,8 @@
   "scripts": {
     "lint": "eslint src",
     "test": "jest",
-    "build": "tshy && flowgen --add-flow-header dist/commonjs/index.d.ts -o dist/commonjs/index.js.flow"
+    "build": "tshy && flowgen --add-flow-header dist/commonjs/index.d.ts -o dist/commonjs/index.js.flow",
+    "prepublishOnly": "npm run build"
   },
   "files": [
     "dist",
