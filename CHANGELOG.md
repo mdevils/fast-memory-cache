@@ -1,3 +1,14 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [3.0.0](https://github.com/mdevils/fast-memory-cache/compare/v2.0.4...v3.0.0) (2025-04-02)
+
+
+### Features
+
+* rewrite using TS, upgrade tooling, improve README ([948f68b](https://github.com/mdevils/fast-memory-cache/commit/948f68bd487fd150ab7270de4af89707ce82332f))
+
 ### 2.0.4
 * Clarify documentation for `expireTime` parameter in `MemoryCache#set`.
 
