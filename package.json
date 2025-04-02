@@ -9,6 +9,16 @@
       "email": "mdevils@yandex.ru"
     }
   ],
+  "funding": [
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/mdevils"
+    },
+    {
+      "type": "patreon",
+      "url": "https://patreon.com/mdevils"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/mdevils/fast-memory-cache"
@@ -18,29 +28,76 @@
     "memory",
     "cache"
   ],
-  "main": "lib/memory-cache.js",
-  "unit-coverage": {
-    "common": [
-      "-s",
-      "lib/**",
-      "-t",
-      "test/**",
-      "--",
-      "test"
-    ]
-  },
+  "main": "./dist/commonjs/index.js",
   "scripts": {
-    "test": "jscs lib && jshint lib && mocha test",
-    "coverage": "unit-coverage run -p common",
-    "coverage-html": "unit-coverage run -p common -R html -o coverage.html"
+    "lint": "eslint src",
+    "test": "jest",
+    "build": "tshy && flowgen --add-flow-header dist/commonjs/index.d.ts -o dist/commonjs/index.js.flow"
   },
+  "files": [
+    "dist",
+    "src",
+    "LICENSE"
+  ],
   "license": "MIT",
   "devDependencies": {
-    "chai": "^1.10.0",
-    "jscs": "^1.7.3",
-    "jshint": "^2.5.10",
-    "mocha": "^2.0.1",
-    "sinon": "^1.12.1",
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
+    "@types/jest": "^29.5.14",
+    "eslint": "^9.23.0",
+    "eslint-config-prettier": "^10.1.1",
+    "flowgen": "^1.21.0",
+    "husky": "^4.3.8",
+    "prettier": "^3.5.3",
+    "release-please": "^17.0.0",
+    "ts-jest": "^29.3.1",
+    "tshy": "^3.0.2",
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.29.0",
     "unit-coverage": "^3.2.0"
-  }
+  },
+  "type": "module",
+  "tshy": {
+    "exports": {
+      "./package.json": "./package.json",
+      ".": "./src/index.ts"
+    },
+    "selfLink": false
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/commonjs/index.d.ts",
+        "default": "./dist/commonjs/index.js"
+      }
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && npm run test",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "rules": {
+      "subject-case": [
+        2,
+        "never",
+        [
+          "start-case",
+          "pascal-case"
+        ]
+      ]
+    }
+  },
+  "types": "./dist/commonjs/index.d.ts",
+  "module": "./dist/esm/index.js"
 }
