@@ -68,5 +68,4 @@ function createMap(): LookupMap {
     return Object.create(null);
 }
 
-// For backward compatibility
 export default MemoryCache;

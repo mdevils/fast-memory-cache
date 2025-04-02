@@ -28,6 +28,26 @@ pnpm add fast-memory-cache
 
 ## Usage
 
+### TypeScript
+
+```ts
+import MemoryCache from 'fast-memory-cache';
+
+interface User {
+  id: number;
+  name: string;
+}
+
+const cache = new MemoryCache();
+
+// Type-safe storage and retrieval
+cache.set<User>('user', { id: 1, name: 'John' });
+const user = cache.get<User>('user'); // User type
+
+// With expiration
+cache.set<string>('token', 'abc123', 300); // expires in 5 minutes
+```
+
 ### JavaScript
 
 ```js
@@ -50,26 +70,6 @@ cache.delete('user');
 
 // Clear all cache
 cache.clear();
-```
-
-### TypeScript
-
-```ts
-import MemoryCache = require('fast-memory-cache');
-
-interface User {
-  id: number;
-  name: string;
-}
-
-const cache = new MemoryCache();
-
-// Type-safe storage and retrieval
-cache.set<User>('user', { id: 1, name: 'John' });
-const user = cache.get<User>('user'); // User type
-
-// With expiration
-cache.set<string>('token', 'abc123', 300); // expires in 5 minutes
 ```
 
 ## API

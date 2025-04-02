@@ -54,8 +54,7 @@
     "ts-jest": "^29.3.1",
     "tshy": "^3.0.2",
     "typescript": "^5.8.2",
-    "typescript-eslint": "^8.29.0",
-    "unit-coverage": "^3.2.0"
+    "typescript-eslint": "^8.29.0"
   },
   "type": "module",
   "tshy": {
